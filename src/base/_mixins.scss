@@ -1,0 +1,219 @@
+@mixin respond($breakpoint) {
+    //~ phone 600px
+    @if $breakpoint == $tab-port {
+        @media screen and (min-width: 37.5em) {
+            @content;
+        }
+    }
+
+    //~ tab-port 900px
+    @if $breakpoint == $tab-land {
+        @media screen and (min-width: 56.25em) {
+            @content;
+        }
+    }
+
+    //~ tab-land 1200px
+    @if $breakpoint == $desktop {
+        @media screen and (min-width: 75em) {
+            @content;
+        }
+    }
+
+    //~ big-desktop 1800px
+    @if $breakpoint == $huge {
+        @media screen and (min-width: 112.5em) {
+            @content;
+        }
+    }
+}
+
+@mixin generate-up-to-rows() {
+    @for $i from 1 through $columns {
+        .#{$row-x-class}.up-to-s#{$i} > .#{$cell-class} {
+            width: calc(100% / #{$i});
+        }
+    }
+
+    @include respond($tab-port) {
+        @for $i from 1 through $columns {
+            .#{$row-x-class}.up-to-s#{$i} > .#{$cell-class} {
+                width: calc(100% / #{$i});
+            }
+        }
+    }
+
+    @include respond($tab-land) {
+        @for $i from 1 through $columns {
+            .#{$row-x-class}.up-to-m#{$i} > .#{$cell-class} {
+                width: calc(100% / #{$i});
+            }
+        }
+    }
+
+    @include respond($desktop) {
+        @for $i from 1 through $columns {
+            .#{$row-x-class}.up-to-l#{$i} > .#{$cell-class} {
+                width: calc(100% / #{$i});
+            }
+        }
+    }
+
+    @include respond($huge) {
+        @for $i from 1 through $columns {
+            .#{$row-x-class}.up-to-x#{$i} > .#{$cell-class} {
+                width: calc(100% / #{$i});
+            }
+        }
+    }
+}
+
+@mixin generate-small-columns() {
+    @for $i from 1 through $columns {
+        .#{$row-x-class} > .#{$cell-class}.s#{$i} {
+            width: calc(#{$i} * 8.33333%);
+        }
+
+        .#{$row-x-class}.margin > .#{$cell-class}.s#{$i} {
+            width: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+        }
+
+        .#{$row-x-class} > .#{$cell-class}.offset-s#{$i} {
+            margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+        }
+
+        .#{$row-x-class}.margin > .#{$cell-class}.offset-s#{$i} {
+            margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+        }
+
+        .#{$row-y-class} > .#{$cell-class}.s#{$i} {
+            height: calc(#{$i} * 8.33333%);
+        }
+
+        .#{$row-y-class}.margin > .#{$cell-class}.s#{$i} {
+            height: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+        }
+
+        .#{$row-y-class} > .#{$cell-class}.offset-s#{$i} {
+            margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+        }
+
+        .#{$row-y-class}.margin > .#{$cell-class}.offset-s#{$i} {
+            margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+        }
+    }
+}
+
+@mixin generate-medium-columns() {
+    @include respond($tab-port) {
+        @for $i from 1 through $columns {
+            .#{$row-x-class} > .#{$cell-class}.m#{$i} {
+                width: calc(#{$i} * 8.33333%);
+            }
+
+            .#{$row-x-class}.margin > .#{$cell-class}.m#{$i} {
+                width: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+            }
+
+            .#{$row-x-class} > .#{$cell-class}.offset-m#{$i} {
+                margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-x-class}.margin > .#{$cell-class}.offset-m#{$i} {
+                margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-y-class} > .#{$cell-class}.m#{$i} {
+                height: calc(#{$i} * 8.33333%);
+            }
+
+            .#{$row-y-class}.margin > .#{$cell-class}.m#{$i} {
+                height: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+            }
+
+            .#{$row-y-class} > .#{$cell-class}.offset-m#{$i} {
+                margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-y-class}.margin > .#{$cell-class}.offset-m#{$i} {
+                margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+        }
+    }
+}
+
+@mixin generate-large-columns() {
+    @include respond($tab-land) {
+        @for $i from 1 through $columns {
+            .#{$row-x-class} > .#{$cell-class}.l#{$i} {
+                width: calc(#{$i} * 8.33333%);
+            }
+
+            .#{$row-x-class}.margin > .#{$cell-class}.l#{$i} {
+                width: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+            }
+
+            .#{$row-x-class} > .#{$cell-class}.offset-l#{$i} {
+                margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-x-class}.margin > .#{$cell-class}.offset-l#{$i} {
+                margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-y-class} > .#{$cell-class}.l#{$i} {
+                height: calc(#{$i} * 8.33333%);
+            }
+
+            .#{$row-y-class}.margin > .#{$cell-class}.l#{$i} {
+                height: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+            }
+
+            .#{$row-y-class} > #{$cell-class}.offset-l#{$i} {
+                margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-y-class}.margin > .#{$cell-class}.offset-l#{$i} {
+                margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+        }
+    }
+}
+
+@mixin generate-extra-large-columns() {
+    @include respond($huge) {
+        @for $i from 1 through $columns {
+            .#{$row-x-class} > .#{$cell-class}.x#{$i} {
+                width: calc(#{$i} * 8.33333%);
+            }
+
+            .#{$row-x-class}.margin > .#{$cell-class}.x#{$i} {
+                width: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+            }
+
+            .#{$row-x-class} > .#{$cell-class}.offset-x#{$i} {
+                margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-x-class}.margin > .#{$cell-class}.offset-x#{$i} {
+                margin-left: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-y-class} > .#{$cell-class}.x#{$i} {
+                height: calc(#{$i} * 8.33333%);
+            }
+
+            .#{$row-y-class}.margin > .#{$cell-class}.x#{$i} {
+                height: calc(#{$i} * 8.33333% - 2 * #{$column-margin-size});
+            }
+
+            .#{$row-y-class} > #{$cell-class}.offset-x#{$i} {
+                margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+
+            .#{$row-y-class}.margin > .#{$cell-class}.offset-x#{$i} {
+                margin-top: calc(#{$i} * 8.33333% + #{$column-margin-size});
+            }
+        }
+    }
+}

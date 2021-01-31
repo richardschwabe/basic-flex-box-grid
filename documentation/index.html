@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GridMadeSimple Demo Page</title>
+    <link rel="stylesheet" href="styles/dracula.css">
+    <script src="highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="../dist/style.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;700&family=Source+Sans+Pro:wght@300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            padding: 1rem;
+            font-size: 1.8rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 300;
+        }
+        
+        @media screen and (min-width: 37.5em) {
+            body {
+                padding: 5rem;
+            }
+        }
+        
+        @media screen and (min-width: 75em) {
+            body {
+                padding: 10rem;
+            }
+        }
+
+        .title-box{
+            margin-bottom:4rem;
+        }
+
+        .title-box__title{
+            font-size:6rem;
+            margin:0;
+            padding:0;
+        }
+
+        .title-box__subtitle{
+            font-size:4rem;            
+            margin:0;
+            padding:0;
+        }
+
+        .section{
+            padding-top:5rem;
+            padding-bottom:10rem;
+            border-bottom:2px solid #f0f0f0;
+        }
+
+        h1 {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-weight: 700;
+        }
+        h2{
+            margin-top:1rem;
+            margin-bottom:.5rem;
+        }
+
+        p{
+            line-height:2.6rem;
+            margin-top:2rem;
+            margin-bottom:1.5rem;
+        }
+
+        a{
+            color:#f66e00;
+            text-decoration:none;
+            padding-bottom:3px;
+        }
+        a:hover, a:active{
+            border-bottom:2px solid #f66e00;
+        }
+
+        table th{
+            text-align: left;
+            padding:1rem;
+            border-bottom:2px solid #ddd;
+        }
+
+        .flex-x {
+            background-color: rgba(255, 69, 0, 0.1);
+            height:10rem;
+        }
+
+        .flex-y {
+            background-color: rgba(255, 69, 0, 0.1);
+        }
+
+        .c {
+            font-size: 2rem;
+            font-weight:400;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .c:nth-child(odd) {
+            background: blueviolet;
+        }
+
+        .c:nth-child(even) {
+            background: gold;
+        }
+
+        span.class, span.sass{
+            display: inline-block;
+            border-radius:.5rem;
+            background:#ddd;
+            padding:0.4rem .8rem;
+            font-family: monospace;
+        }
+
+        span.sass{
+            color:rgb(236, 133, 228);
+            background:#303030;
+        }
+
+        span.viewport-size{
+            background-color:#ddd;
+            padding:0.2rem 0.6rem;
+            font-style: italic;
+            border-radius:3px;
+        }
+
+        span.cell-blob, span.row-blob{
+            padding:0.4rem 0.8rem;
+            border-radius: 5px;
+            color:white;
+            font-weight: 500;
+            font-size:1.4rem;
+        }
+
+        span.cell-blob{
+            background:gold
+        }
+        span.row-blob{
+            background: blueviolet
+        }
+
+        pre{
+            margin-bottom:2rem;
+        }
+
+        code{
+            border-radius:1rem;
+        }
+
+        pre::before{
+            content: "Code: ";
+            font-size:2rem;
+        }
+
+        blockquote{
+            font-size: 2rem;
+            padding:2rem;
+            border-left: 1rem solid orangered;
+        }
+
+        .class-reference-table{            
+            border-radius: .5rem;
+            width: 100%;
+        }
+        .class-reference-table tr td{            
+            padding:1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        .class-reference-table tr:nth-child(odd){
+            background-color:#f2f2f2;
+        }
+
+        .baseline-example-col-1{
+            height:8rem;
+            padding:1rem;
+        }
+        
+        .baseline-example-col-3{
+            height:5rem;
+            padding:2rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="title-box">
+        <h1 class="title-box__title">Basic Flex Box Grid</h1>
+        <p class="title-box__subtitle">A super simple display:flex grid. </p>
+    </div>
+
+    <div class="section__introduction">
+        <h2>Tl;dr</h2>
+        <p>
+           Written in Sass, you can configure class names, provides 4 hard breakpoints, access to justify-content and align-items. 
+        </p>
+        <h2>Introduction</h2>
+        <p>
+            The grid is based on the various other CSS frameworks. Without all the styling extras of a framework. It only focuses on a grid system, based on flexbox.
+        </p>
+        <p>
+            If you want to change the grid gap, column count etc, simply edit the variables.scss file. You can configure
+            everything from there to your needs. A full list of variables and classes are at the bottom of the documentation.
+        </p>
+
+        <p>
+            The paddings, margins, etc. are calculated based on the 16px default browser font size and everything works with
+            rem. Therefore, you could create a container with padding: 0 20rem; or similar, whatever your use case is.
+            The <span class="class">.flex-x</span> class will take 100% width at all times.
+        </p>
+        <p>
+            We did not include a "container" class, as we do not see a need for it. If you need a container class, you will need to do it yourself. 
+        </p>
+        
+        <h3>A few things to keep in mind</h3>
+        <p>
+           This might be still relevant to you. <a href="https://jakearchibald.com/2014/dont-use-flexbox-for-page-layout/">Why not to use flexbox as a grid.</a>
+        </p>
+        <p>
+            Media Queries: <a href="https://bradfrost.com/blog/post/7-habits-of-highly-effective-media-queries/">Some media query rules</a>
+
+            Though, we did define some major breakpoints (600, 900, 1200 and 1800). 
+
+            We also support: 
+            <blockquote>"Start with the small screen first, then expand until it looks like shit. Time for a breakpoint! –Stephen Hay"</blockquote>
+        </p>
+        <p>
+            All media queries are written with min-width, rather than max-width. <a href="https://www.mightyminnow.com/2013/11/what-is-mobile-first-css-and-why-does-it-rock/">Why mobile first</a>
+        </p>
+
+    </div>
+
+    </div>
+
+    <div class="section section__example">
+        <h1>Basic flex-x</h1>
+        <p>
+            <span class="class">.flex-x</span> is used to define a new row, which holds up to 12 columns of class <span class="class">.c</span>
+        </p>
+
+        <p>
+            A column can have any width, these are defined by the numbers 1 to 12. For example, <span class="class">.l3</span> creates a 3 column wide column on viewports with at least 1200px width.
+        </p>
+        <p>
+            <span class="class">.s1-12</span> is used for at least 600px
+        </p>
+        <p>
+            <span class="class">.m1-12</span> is used for at least  1200px
+        </p>
+        <p>
+            <span class="class">.x1-12</span> is used for at least 1800px
+        </p>
+
+        <div class="flex-x">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+            <div class="c s1">6</div>
+            <div class="c s1">7</div>
+            <div class="c s1">8</div>
+            <div class="c s1">9</div>
+            <div class="c s1">10</div>
+            <div class="c s1">11</div>
+            <div class="c s1">12</div>
+        </div>
+    </div>
+
+    <div class="section section__example">
+        <h1>Basic example</h1>
+        
+<pre><code class="html">
+&lt;div class="flex-x"&gt;
+    &lt;div class="c s6"&gt;1&lt;/div&gt;
+    &lt;div class="c s6"&gt;2&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>
+    2 columns
+</p>
+        <div class="flex-x">
+            <div class="c s6">1</div>
+            <div class="c s6">2</div>
+        </div>
+        <p>
+            4 columns
+        </p>
+        <div class="flex-x">
+            <div class="c x3 l6 m4 s4">1</div>
+            <div class="c x2 l1 m3 s2">2</div>
+            <div class="c x2 l1 m3 s2">3</div>
+            <div class="c x3 l4 m2 s4">4</div>
+        </div>
+        <p>
+            3 columns
+        </p>
+        <div class="flex-x">
+            <div class="c x2 l2 m6 s4">1</div>
+            <div class="c x7 l7 m5 s4">2</div>
+            <div class="c x1 l1 m1 s4">3</div>
+        </div>
+    </div>
+
+    <div class="section section__example">
+        <h1>flex-x with .margin</h1>
+        <p>
+            12 columns, default 1rem gap between columns
+        </p>
+        
+<pre><code class="html">
+&lt;div class="flex-x margin"&gt;
+    &lt;div class="c s1"&gt;1&lt;/div&gt;
+    &lt;div class="c s1"&gt;2&lt;/div&gt;
+    &lt;div class="c s1"&gt;3&lt;/div&gt;
+    ...
+&lt;/div&gt;
+    </code></pre>
+        <div class="flex-x margin">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+            <div class="c s1">6</div>
+            <div class="c s1">7</div>
+            <div class="c s1">8</div>
+            <div class="c s1">9</div>
+            <div class="c s1">10</div>
+            <div class="c s1">11</div>
+            <div class="c s1">12</div>
+        </div>
+    </div>
+
+
+    <div class="section section__example">
+        <h1>flex-x with .padding</h1>
+        <p>
+            12 columns, default padding
+        </p>
+        
+<pre><code class="html">
+&lt;div class="flex-x padding"&gt;
+    &lt;div class="c s1"&gt;1&lt;/div&gt;
+    &lt;div class="c s1"&gt;2&lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+        <div class="flex-x padding">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+            <div class="c s1">6</div>
+            <div class="c s1">7</div>
+            <div class="c s1">8</div>
+            <div class="c s1">9</div>
+            <div class="c s1">10</div>
+            <div class="c s1">11</div>
+            <div class="c s1">12</div>
+        </div>
+    </div>
+
+
+    <div class="section section__example">
+        <h1>Column use remaining space with .auto</h1>
+        <p>
+            3 columns, s1 s4 auto
+        </p>
+        
+<pre><code class="html">
+&lt;div class="flex-x"&gt;
+    &lt;div class="c s1"&gt;1&lt;/div&gt;
+    &lt;div class="c s4"&gt;2&lt;/div&gt;
+    &lt;div class="c auto"&gt;auto&lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+        <div class="flex-x">
+            <div class="c s1">1</div>
+            <div class="c s4">2</div>
+            <div class="c auto">auto</div>
+        </div>
+
+        <p>
+            3 columns, s3 auto auto
+        </p>
+        <div class="flex-x margin">
+            <div class="c s3">1</div>
+            <div class="c auto ">auto</div>
+            <div class="c auto ">auto</div>
+        </div>
+
+    </div>
+
+    
+    <div class="section section__example">
+        <h1>Block limitations with .up-to-X</h1>
+        <p>
+            If you want to limit a flex-x to a certain cell block size you can use the <span class="class">.up-to-l3</span> or similar classes. 
+        </p>
+        
+<pre><code class="html">
+&lt;div class="flex-x up-to-l4 up-to-m3 up-to-s2 up-to-x5"&gt;
+    &lt;div class="c"&gt;1&lt;/div&gt;
+    &lt;div class="c"&gt;2&lt;/div&gt;
+    &lt;div class="c"&gt;3&lt;/div&gt;
+    &lt;div class="c"&gt;4&lt;/div&gt;
+    &lt;div class="c"&gt;5&lt;/div&gt;
+&lt;/div&gt;
+    </code></pre>
+        <div class="flex-x up-to-l4 up-to-m3 up-to-s2 up-to-x5">
+            <div class="c">1</div>
+            <div class="c">2</div>
+            <div class="c">3</div>
+            <div class="c">4</div>
+            <div class="c">5</div>
+        </div>
+    </div>
+
+
+    <div class="section section__example">
+        <h1>Small sizes only defined</h1>
+        <p>
+            3 columns, only s4 applied
+        </p>
+        <div class="flex-x">
+            <div class="c s4">1</div>
+            <div class="c s4 ">2</div>
+            <div class="c s4">3 </div>
+        </div>
+        
+        <h1>Medium sizes only defined</h1>
+        <p>
+            3 columns, only m4 applied
+        </p>
+        <div class="flex-x">
+            <div class="c m4 ">1 </div>
+            <div class="c m4 "> 2 </div>
+            <div class="c m4 ">3 </div>
+        </div>
+
+    </div>
+
+    <div class="section section__example">
+        <h1>Reverse mode with .reverse</h1>
+        <p>
+            12 columns in reverse.
+        </p>
+<pre><code class="html">
+&lt;div class="flex-x reverse"&gt;
+    &lt;div class="c s1"&gt;1&lt;/div&gt;
+    &lt;div class="c s1"&gt;2&lt;/div&gt;
+    &lt;div class="c s1"&gt;3&lt;/div&gt;
+    ...
+&lt;/div&gt;
+</code></pre>
+        <div class="flex-x reverse">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+            <div class="c s1">6</div>
+            <div class="c s1">7</div>
+            <div class="c s1">8</div>
+            <div class="c s1">9</div>
+            <div class="c s1">10</div>
+            <div class="c s1">11</div>
+            <div class="c s1">12</div>
+        </div>
+
+    </div>
+
+    <div class="section section__example">
+        <h1>Hide on mobile with .s-hidden</h1>
+        <p>
+            To hide any column on a size, you can youse <span class="class">.s-hidden</span>, <span class="class">.m-hidden</span>, <span class="class">.l-hidden</span> or  <span class="class">.x-hidden</span>
+        </p>
+        <p>
+            Hide a column on mobile
+        </p>
+<pre><code class="html">
+&lt;div class="flex-x"&gt;
+    &lt;div class="c x4 l4 m4 s12"&gt;1&lt;/div&gt;
+    &lt;div class="c x4 l4 m4 s-hidden"&gt;2 (hidden on small screen)&lt;/div&gt;
+    &lt;div class="c x4 l4 m4 s12"&gt;3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <div class="flex-x">
+            <div class="c x4 l4 m4 s12">1</div>
+            <div class="c x4 l4 m4 s-hidden">2 (hidden on small screen)</div>
+            <div class="c x4 l4 m4 s12">3</div>
+        </div>
+
+    </div>
+
+    <div class="section section__example">
+        <h1>Justify horizontally</h1>
+        <p>
+           If you want to override the default grid gap, you can specify various justify-content settings.
+        </p>
+        <h2>.space-between</h2>
+        <div class="flex-x space-between">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+        </div>
+        <h2>.space-around</h2>
+        <div class="flex-x space-around">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+        </div>
+        <h2>.space-even</h2>
+        <div class="flex-x space-even">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+        </div>
+        
+        <h2>.space-end</h2>
+        <div class="flex-x space-end">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+        </div>
+        
+        <h2>.space-center</h2>
+        <div class="flex-x space-center">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c s1">4</div>
+            <div class="c s1">5</div>
+        </div>
+
+        
+        <h1 id="vertical-alignment">Align vertically</h1>
+        <p>
+          Sometimes cells do not share the same height and you would want to change the way they are aligned vertically. Similar to the justify-content classes, also align-items classes are provided.
+        </p>
+       
+        <h2>.align-end</h2>
+        <div class="flex-x align-end">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+        </div>
+        
+        <h2>.align-center</h2>
+        <div class="flex-x align-center">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+        </div>
+        
+        <h2>.align-stretch</h2>
+        <div class="flex-x align-stretch">
+            <div class="c s1">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+        </div>
+        
+        <h2>.align-baseline</h2>
+        <div class="flex-x align-baseline">
+            <div class="c s1 baseline-example-col-1">1</div>
+            <div class="c s1 baseline-example-col-2">2</div>
+            <div class="c s1 baseline-example-col-3">3</div>
+        </div>
+
+    </div>
+
+
+
+    <div class="section section__example">
+        <h1>Offset columns</h1>
+        <p>
+            Offsets are available on all sizes. Simply use the offset size and which viewsize, i.e.:<span class="class">.offset-s4</span>, <span class="class">.offset-m2</span> or <span class="class">.offset-l5</span>
+        </p>
+        <p>
+            4 columns
+        </p>
+<pre><code class="html">
+&lt;div class="flex-x"&gt;
+    &lt;div class="c s2 offset-s4"&gt;1&lt;/div&gt;
+    &lt;div class="c s1"&gt;2&lt;/div&gt;
+    &lt;div class="c s1"&gt;3&lt;/div&gt;
+    &lt;div class="c auto"&gt;4&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <div class="flex-x">
+            <div class="c s2 offset-s4">1</div>
+            <div class="c s1">2</div>
+            <div class="c s1">3</div>
+            <div class="c auto">4</div>
+        </div>
+
+        <p>
+            Within <span class="class">.margin</span>
+        </p>
+        <div class="flex-x margin">
+            <div class="c s3 offset-s4">1</div>
+            <div class="c s1">2</div>
+            <div class="c s2">3</div>
+            <div class="c auto">4</div>
+        </div>
+
+    </div>
+    <div class="section section__example">
+        <h1>Vertical Grids with .flex-y</h1>
+        <p>
+            To stack columns in a vertical direction we use <span class="class">.flex-y</span>.
+        </p>
+        
+<pre><code class="html">
+&lt;div class="flex-y"&gt;
+    &lt;div class="c x1 l1"&gt;1 &lt;/div&gt;
+    &lt;div class="c x2 l2"&gt;2&lt;/div&gt;
+    &lt;div class="c auto"&gt;3&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+        <div class="flex-y" style="height:20vh">
+            <div class="c x1 l1">1 </div>
+            <div class="c x2 l2">2</div>
+            <div class="c auto">3</div>
+        </div>
+
+    </div>
+
+    <div class="section section__class-list">
+        <h1>Class List</h1>
+        <p>
+            For a full reference of all classes, see below the following table.
+        </p>
+
+        <table class="class-reference-table" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Default Class Name</th>
+                    <th>Applied to</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <span class="class">.flex-x</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                        Defines a new horizontal container
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.flex-y</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                        Defines a new vertical container
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="class">.c</span>
+                    </td>
+                    <td>
+                        <span class="cell-blob">cell</span>
+                    </td>
+                    <td>
+                        Defines a new cell
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="class">.s1 - .s12</span>
+                    </td>
+                    <td>
+                        <span class="cell-blob">cell</span>
+                    </td>
+                    <td>
+                        Cell width on <span class="viewport-size">small</span> and onwards
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="class">.m1 - .m12</span>
+                    </td>
+                    <td>
+                        <span class="cell-blob">cell</span>
+                    </td>
+                    <td>
+                        Cell width on <span class="viewport-size">tablet portrait</span> and onwards
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="class">.l1 - .l12</span>
+                    </td>
+                    <td>
+                        <span class="cell-blob">cell</span>
+                    </td>
+                    <td>
+                        Cell width on <span class="viewport-size">tablet landscape</span> and onwards
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="class">.x1 - .x12</span>
+                    </td>
+                    <td>
+                        <span class="cell-blob">cell</span>
+                    </td>
+                    <td>
+                        Cell width on <span class="viewport-size">desktop</span> and "onwards"
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="class">.margin</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       Provides horizontal margin on row and between cells. Default value is 1rem. 
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.padding</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       Provides horizontal padding on row and between cells. Default value is 1rem. 
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.reverse</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       Reverses the order of items (flex-direction)
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.space-end</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies justify-content: space-end
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.space-center</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies justify-content: center
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.space-between</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies justify-content: space-between
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.space-around</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies justify-content: space-around
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.space-even</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies justify-content: space-evenly
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.align-end</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies align-items: flex-end
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.align-center</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies align-items: center
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.align-stretch</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies align-items: stretch
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.align-baseline</span>
+                    </td>
+                    <td>
+                        <span class="row-blob">row</span>
+                    </td>
+                    <td>
+                       applies align-items: baseline
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <span class="class">.auto</span>
+                    </td>
+                    <td>
+                        <span class="cell-blob">cell</span>
+                    </td>
+                    <td>
+                       applies flex: 1 1 0 (grow shrink basis), allows cells to fill remaining space
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <span class="class">.s-hidden</span>
+                        <span class="class">.m-hidden</span>
+                        <span class="class">.l-hidden</span>
+                        <span class="class">.x-hidden</span>
+                    </td>
+                    <td>
+                        <span class="cell-blob">cell</span>
+                    </td>
+                    <td>
+                       Hides item via display:none on selected screen-size only.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section section__sass-reference">
+        <h1>Sass Reference</h1>
+        <p>
+            For a full reference of all Sass variables and mixins.
+        </p>
+
+        <table class="class-reference-table" cellpadding="0" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Variable</th>
+                    <th>Default Value</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            
+            <tr>
+                <td>
+                    <span class="sass">$row-x-class</span>
+                </td>
+                <td>
+                    flex-x
+                </td>
+                <td>
+                    Defines a new horizontal container
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sass">$row-y-class</span>
+                </td>
+                <td>
+                    flex-y
+                </td>
+                <td>
+                    Defines a new vertical container
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <span class="sass">$cell-class</span>
+                </td>
+                <td>
+                    c
+                </td>
+                <td>
+                    Defines a new cell
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sass">$columns</span>
+                </td>
+                <td>
+                    12
+                </td>
+                <td>
+                    Defines how many columns the grid has
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sass">$column-margin-size</span>
+                </td>
+                <td>
+                    1rem
+                </td>
+                <td>
+                    Gap between columns
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sass">$column-padding-size</span>
+                </td>
+                <td>
+                    1rem
+                </td>
+                <td>
+                    Padding inside a column
+                </td>
+            </tr>
+           
+
+            <tr>
+                <td>
+                    <span class="sass">$tab-port</span>
+                </td>
+                <td>
+                    tab-port
+                </td>
+                <td>
+                    Used for tablet portrait viewport identification
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sass">$tab-port-size</span>
+                </td>
+                <td>
+                    600
+                </td>
+                <td>
+                    Min width of tablet portrait screen size in px
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <span class="sass">$tab-land</span>
+                </td>
+                <td>
+                    tab-land
+                </td>
+                <td>
+                    Used for tablet landscape viewport identification
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span class="sass">$tab-land-size</span>
+                </td>
+                <td>
+                    900
+                </td>
+                <td>
+                    Min width of tablet landscape screen size in px
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <span class="sass">$desktop</span>
+                </td>
+                <td>
+                    desktop
+                </td>
+                <td>
+                    Used for desktop viewport identification
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <span class="sass">$desktop-size</span>
+                </td>
+                <td>
+                    1200
+                </td>
+                <td>
+                    Min width of desktop screen size in px
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <span class="sass">$huge</span>
+                </td>
+                <td>
+                    huge
+                </td>
+                <td>
+                    Used for full hd desktop viewport identification
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    <span class="sass">$huge-size</span>
+                </td>
+                <td>
+                    1800
+                </td>
+                <td>
+                    Min width of full hd desktop screen size in px
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+
+
+
+</body>
+
+</html>

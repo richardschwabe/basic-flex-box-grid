@@ -1,0 +1,151 @@
+.#{$row-x-class} {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+
+    &.margin {
+        margin-left: -$column-margin-size;
+        margin-right: -$column-margin-size;
+
+        .#{$cell-class} {
+            margin-left: $column-margin-size;
+            margin-right: $column-margin-size;
+        }
+    }
+
+    &.padding {
+        padding-right: $column-padding-size;
+        padding-left: $column-padding-size;
+
+        .#{$cell-class} {
+            padding-right: $column-padding-size;
+            padding-left: $column-padding-size;
+        }
+    }
+
+    &.reverse {
+        flex-direction: row-reverse;
+    }
+
+    &.space-end {
+        justify-content: flex-end;
+    }
+
+    &.space-center {
+        justify-content: center;
+    }
+
+    &.space-between {
+        justify-content: space-between;
+    }
+
+    &.space-around {
+        justify-content: space-around;
+    }
+
+    &.space-even {
+        justify-content: space-evenly;
+    }
+
+    &.align-end {
+        align-items: flex-end;
+    }
+
+    &.align-center {
+        align-items: center;
+    }
+
+    &.align-stretch {
+        align-items: stretch;
+    }
+
+    &.align-baseline {
+        align-items: baseline;
+    }
+}
+
+.#{$row-y-class} {
+    display: flex;
+    flex-flow: column wrap;
+
+    &.margin {
+        margin-top: -$column-margin-size;
+        margin-bottom: -$column-margin-size;
+
+        .#{$cell-class} {
+            margin-top: $column-margin-size;
+            margin-bottom: $column-margin-size;
+        }
+    }
+
+    &.padding {
+        .#{$cell-class} {
+            padding-bottom: $column-padding-size;
+            padding-top: $column-padding-size;
+        }
+    }
+
+    &.reverse {
+        flex-direction: column-reverse;
+    }
+}
+
+.#{$cell-class} {
+    flex: 0 0 auto;
+    min-width: 0px;
+    min-height: 0px;
+    width: 100%;
+
+    &.auto {
+        flex: 1 1 0;
+    }
+
+    // Hide on size
+    &.s-hidden {
+        display: none;
+    }
+
+    @include respond($tab-port) {
+        &.s-hidden {
+            display: flex;
+        }
+
+        &.m-hidden {
+            display: none;
+        }
+    }
+
+    @include respond($tab-land) {
+        &.m-hidden {
+            display: flex;
+        }
+
+        &.l-hidden {
+            display: none;
+        }
+    }
+
+    @include respond($desktop) {
+        &.l-hidden {
+            display: flex;
+        }
+
+        &.x-hidden {
+            display: none;
+        }
+    }
+}
+// Small Size
+@include generate-small-columns();
+
+// Medium Size
+@include generate-medium-columns();
+
+// Large Screens
+@include generate-large-columns();
+
+// Large Screens
+@include generate-extra-large-columns();
+
+// Generate UP TO Classes
+@include generate-up-to-rows();
