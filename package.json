@@ -26,8 +26,8 @@
     "css grid framework"
   ],
   "scripts": {
-    "watch:scss": "node-sass src/main.scss dist/style.css -w",
-    "watch:html": "live-server --open=documentation",
+    "watch:scss": "node-sass src/main.scss docs/styles/flex-grid.css -w",
+    "watch:html": "live-server --open=docs",
     "develop": "npm-run-all --parallel watch:scss watch:html",
     "compile:sass": "node-sass src/main.scss dist/flex-grid.css",
     "prefix:css": "postcss --use autoprefixer -b 'last 10 versions' dist/flex-grid.css -o dist/flex-grid.prefix.css",
