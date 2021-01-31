@@ -1,6 +1,6 @@
 {
   "name": "basic-flex-box-grid",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple display:flex css grid",
   "main": "index.js",
   "author": "Richard Schwabe",
