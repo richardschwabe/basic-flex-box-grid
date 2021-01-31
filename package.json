@@ -1,18 +1,24 @@
 {
   "name": "basic-flex-box-grid",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple display:flex css grid",
   "main": "index.js",
   "author": "Richard Schwabe",
+  "homepage": "https://github.com/richardschwabe/basic-flex-box-grid",
   "repository": {
     "type": "git",
-    "url": "https://github.com/richardschwabe/basic-flex-box-grid"
+    "url": "git+https://github.com/richardschwabe/basic-flex-box-grid.git"
   },
   "bugs": {
     "url": "https://github.com/richardschwabe/basic-flex-box-grid/issues"
   },
-  "license": "GNU3",
+  "license": "MIT",
   "keywords": [
+    "css",
+    "sass",
+    "flexbox",
+    "responsive",
+    "framework",
     "css framework",
     "flexbox framework",
     "css flexbox",
