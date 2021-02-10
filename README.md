@@ -15,7 +15,7 @@ npm i basic-flex-box-grid
 ```
 
 ```
-yarn add basic-flex-box-grid
+yarn basic-flex-box-grid
 ```
 
 ## Introduction

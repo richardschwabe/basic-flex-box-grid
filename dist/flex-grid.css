@@ -27,8 +27,23 @@ body {
     .flex-x.padding .c {
       padding-right: 1rem;
       padding-left: 1rem; }
-  .flex-x.reverse {
+  .flex-x.reverse, .flex-x.s-reverse {
     flex-direction: row-reverse; }
+  @media screen and (min-width: 37.5em) {
+    .flex-x.s-reverse {
+      flex-direction: row; }
+    .flex-x.m-reverse {
+      flex-direction: row-reverse; } }
+  @media screen and (min-width: 56.25em) {
+    .flex-x.m-reverse {
+      flex-direction: row; }
+    .flex-x.l-reverse {
+      flex-direction: row-reverse; } }
+  @media screen and (min-width: 75em) {
+    .flex-x.l-reverse {
+      flex-direction: row; }
+    .flex-x.x-reverse {
+      flex-direction: row-reverse; } }
   .flex-x.space-end {
     justify-content: flex-end; }
   .flex-x.space-center {

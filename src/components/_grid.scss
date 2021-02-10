@@ -23,8 +23,39 @@
         }
     }
 
-    &.reverse {
+    &.reverse,
+    &.s-reverse {
         flex-direction: row-reverse;
+    }
+
+    @include respond($tab-port) {
+        &.s-reverse {
+            flex-direction: row;
+        }
+
+        &.m-reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
+    @include respond($tab-land) {
+        &.m-reverse {
+            flex-direction: row;
+        }
+
+        &.l-reverse {
+            flex-direction: row-reverse;
+        }
+    }
+
+    @include respond($desktop) {
+        &.l-reverse {
+            flex-direction: row;
+        }
+
+        &.x-reverse {
+            flex-direction: row-reverse;
+        }
     }
 
     &.space-end {
